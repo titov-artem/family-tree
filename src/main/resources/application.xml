@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="db-config.xml"/>
+    <import resource="db-layer-config.xml"/>
+
+    <import resource="http-server-config.xml"/>
+    <import resource="cxf-container-config.xml"/>
+    <import resource="services-config.xml"/>
+
+    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath*:application.properties</value>
+            </list>
+        </property>
+        <property name="ignoreResourceNotFound" value="false"/>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
+</beans>

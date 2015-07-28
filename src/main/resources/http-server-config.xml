@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="jettyServer" class="org.eclipse.jetty.server.Server" destroy-method="stop">
+        <property name="connectors" ref="jettyConnector"/>
+        <property name="handler" ref="jettyHandler"/>
+        <property name="stopAtShutdown" value="true"/>
+    </bean>
+
+    <bean id="jettyConnector" class="org.eclipse.jetty.server.ServerConnector">
+        <constructor-arg ref="jettyServer"/>
+        <property name="port" value="${http.server.port}"/>
+    </bean>
+
+    <bean id="jettyHandler" class="org.eclipse.jetty.server.handler.HandlerCollection">
+        <property name="handlers">
+            <list>
+                <bean class="org.eclipse.jetty.servlet.ServletContextHandler">
+                    <property name="contextPath" value="/"/>
+                    <property name="servletHandler">
+                        <bean class="org.eclipse.jetty.servlet.ServletHandler">
+                            <property name="servlets">
+                                <list>
+                                    <bean class="org.eclipse.jetty.servlet.ServletHolder">
+                                        <constructor-arg value="cxf"/>
+                                        <constructor-arg>
+                                            <bean class="org.apache.cxf.transport.servlet.CXFNonSpringServlet" init-method="init">
+                                                <property name="bus" ref="cxf"/>
+                                            </bean>
+                                        </constructor-arg>
+                                    </bean>
+                                </list>
+                            </property>
+                            <property name="servletMappings">
+                                <list>
+                                    <bean class="org.eclipse.jetty.servlet.ServletMapping">
+                                        <property name="servletName" value="cxf"/>
+                                        <property name="pathSpecs">
+                                            <list>
+                                                <value>/*</value>
+                                            </list>
+                                        </property>
+                                    </bean>
+                                </list>
+                            </property>
+                        </bean>
+                    </property>
+                </bean>
+                <bean class="org.eclipse.jetty.server.handler.DefaultHandler"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="jettyStarter" class="ru.family.tree.server.JettyStarter" init-method="start">
+        <property name="jettyServer" ref="jettyServer"/>
+    </bean>
+
+</beans>

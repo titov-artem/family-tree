@@ -1,0 +1,22 @@
+body {}
+
+.person-id {
+    float: left;
+    padding-right: 5px;
+}
+
+.person-name {
+    float: left;
+    padding-left: 5px;
+    padding-right: 5px;
+    /*border: solid 1px red;*/
+}
+
+.person-description {
+    /*float: left;*/
+}
+
+.remove-person {
+    float: right;
+    cursor: pointer;
+}

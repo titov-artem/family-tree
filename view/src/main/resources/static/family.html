@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Family</title>
+    <!-- CSS libraries -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/lib/selectize.bootstrap3.css">
+
+    <!-- JS libraries -->
+    <script src="js/lib/jquery-1.11.3.min.js"></script>
+    <script src="js/lib/underscore.js"></script>
+    <script src="js/lib/backbone.js"></script>
+    <script src="js/lib/mustache.min.js"></script>
+    <script src="js/lib/ICanHaz.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/lib/selectize.js"></script>
+
+    <!-- Project CSS -->
+    <link rel="stylesheet" href="css/family.css"/>
+
+    <!-- Project JS -->
+    <script src="js/endpoint.js"></script>
+    <script src="js/family.js"></script>
+
+</head>
+<body>
+<script language="JavaScript">
+    $(document).ready(function () {
+//        $("#person1").selectize({create: true});
+        $("#person2").selectize({create: true});
+    });
+</script>
+
+<div class="container">
+    <div class="panel col-md-5">
+        <div class="panel-body">
+            <form class="form-horizontal">
+                <input type="hidden" id="familyId" name="familyId" value="1"/>
+                <div class="form-group">
+                    <label for="person1" class="col-md-4 form-line">First person</label>
+
+                    <div class="col-md-8">
+                        <select id="person1" placeholder="Select first person...">
+                            <option></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="person2" class="col-md-4 form-line">Second person</label>
+
+                    <div class="col-md-8">
+                        <select id="person2" placeholder="Select second person...">
+                            <option></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 form-line">Relation type</label>
+
+                    <div class="btn-group col-md-8" data-toggle="buttons">
+                        <label class="relation-type btn btn-default active">
+                            <input type="radio" name="relation-type" id="relation-parent-child" value="PARENT_CHILD" autocomplete="off"
+                                   checked> Parent - child
+                        </label>
+                        <label class="relation-type btn btn-default">
+                            <input type="radio" name="relation-type" id="relation-spouses" value="SPOUSES" autocomplete="off"> Spouses
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-8 col-md-offset-4">
+                        <button type="button" id="add-relation" class="btn btn-success col-md-6">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

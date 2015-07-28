@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="personManager" class="ru.family.tree.managers.impl.MySqlPersonManager">
+        <property name="jdbcOperations" ref="jdbcOperations"/>
+    </bean>
+
+    <bean id="familyManager" class="ru.family.tree.managers.impl.MySqlFamilyTreeManager">
+        <property name="transactionOperations" ref="transactionOperations"/>
+        <property name="jdbcOperations" ref="jdbcOperations"/>
+        <property name="personManager" ref="personManager"/>
+    </bean>
+
+</beans>
